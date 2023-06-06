@@ -19,6 +19,7 @@
         $title = $row2['title'];
         $description = $row2['description'];
         $price = $row2['price'];
+        $making_cost = $row2['making_cost'];
         $current_image = $row2['image_name'];
         $current_category = $row2['category_id'];
         $featured = $row2['featured'];
@@ -60,6 +61,13 @@
                 <td>Price: </td>
                 <td>
                     <input type="number" name="price" value="<?php echo $price; ?>">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Making Cost: </td>
+                <td>
+                    <input type="number" name="making_cost" value="<?php echo $making_cost; ?>">
                 </td>
             </tr>
 
@@ -172,7 +180,7 @@
                 $price = $_POST['price'];
                 $current_image = $_POST['current_image'];
                 $category = $_POST['category'];
-
+                $making_cost = $_POST['making_cost'];
                 $featured = $_POST['featured'];
                 $active = $_POST['active'];
 
@@ -251,6 +259,7 @@
                     title = '$title',
                     description = '$description',
                     price = $price,
+                    making_cost = $making_cost,
                     image_name = '$image_name',
                     category_id = '$category',
                     featured = '$featured',

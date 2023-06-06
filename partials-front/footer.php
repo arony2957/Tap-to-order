@@ -18,9 +18,6 @@
 
     <!-- footer Section Starts Here -->
     <section class="footer">
-        <div class="container text-center">
-            <p>2023 All rights reserved, Food Order System. Developed By  <a href="#">Ryan Sultana Arony</a></p>
-        </div>
     </section>
     <!-- footer Section Ends Here -->
 

@@ -1,4 +1,4 @@
-<?php include('../config/constants.php'); ?>
+<?php include('config/constants.php'); ?>
 
 <html>
     <head>
@@ -65,7 +65,8 @@
 
         //3. Execute the Query
         $res = mysqli_query($conn, $sql);
-
+        $userData = mysqli_fetch_assoc($res);
+//print_r($res); exit;
         //4. COunt rows to check whether the user exists or not
         $count = mysqli_num_rows($res);
 
@@ -73,7 +74,9 @@
         {
             //User AVailable and Login Success
             $_SESSION['login'] = "<div class='success'>Login Successful.</div>";
-            $_SESSION['user'] = $username; //TO check whether the user is logged in or not and logout will unset it
+            $_SESSION['front_user'] = $username; //TO check whether the user is logged in or not and logout will unset it
+            $_SESSION['front_user_id'] = $userData['id']; 
+            //print_r($_SESSION['front_user_id']); exit;
 
             //REdirect to HOme Page/Dashboard
             header('location:'.SITEURL.'index.php');

@@ -1,7 +1,7 @@
 <!-- Footer Section Starts -->
 <div class="footer">
             <div class="wrapper">
-                <p class="text-center">2023 All rights reserved, Food Mania. </p>
+                <p class="text-center">Tap to Order </p>
             </div>
         </div>
         <!-- Footer Section Ends -->

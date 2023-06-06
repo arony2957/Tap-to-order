@@ -1,107 +1,90 @@
-<?php include('partials-front/menu.php'); ?>
+<?php include('config/constants.php'); ?>
 
+<html>
+<head>
+    <title>Register - Food Order System</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
 
-<div class="main-content">
-    <div class="wrapper">
-        <h1>Registration</h1>
+<body>
 
+<div class="login">
+    <h1 class="text-center">Registration</h1>
+    <br><br>
+
+    <?php
+    if(isset($_SESSION['login']))
+    {
+        echo $_SESSION['login'];
+        unset($_SESSION['login']);
+    }
+
+    if(isset($_SESSION['no-login-message']))
+    {
+        echo $_SESSION['no-login-message'];
+        unset($_SESSION['no-login-message']);
+    }
+    ?>
+    <br><br>
+
+    <!-- Login Form Starts HEre -->
+    <form action="" method="POST" class="text-center">
+        Fullname: <br>
+        <input type="text" name="fullname" placeholder="Enter Your name"><br><br>
+
+        Username: <br>
+        <input type="text" name="username" placeholder="Enter Username"><br><br>
+
+        Password: <br>
+        <input type="password" name="password" placeholder="Enter Password"><br><br>
+
+        <input type="submit" name="submit" value="Register" class="btn-primary">
         <br><br>
+    </form>
+    <!-- Login Form Ends HEre -->
 
-        <?php 
-            if(isset($_SESSION['add'])) //Checking whether the SEssion is Set of Not
-            {
-                echo $_SESSION['add']; //Display the SEssion Message if SEt
-                unset($_SESSION['add']); //Remove Session Message
-            }
-        ?>
-
-        <form action="" method="POST">
-
-            <table class="tbl-30">
-                <tr>
-                    <td>Full Name: </td>
-                    <td>
-                        <input type="text" name="full_name" placeholder="Enter Your Name">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Username: </td>
-                    <td>
-                        <input type="text" name="username" placeholder="Your Username">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Password: </td>
-                    <td>
-                        <input type="password" name="password" placeholder="Your Password">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" name="submit" value="Registration" class="btn-secondary">
-                    </td>
-                </tr>
-
-            </table>
-
-        </form>
-
-
-    </div>
+    <p class="text-center">Created By - <a>Ryan Sultana Arony</a></p>
 </div>
 
+</body>
+</html>
+
+<?php
+
+//CHeck whether the Submit Button is Clicked or NOt
+if(isset($_POST['submit']))
+{
+    //Process for Login
+    //1. Get the Data from Login form
+    // $username = $_POST['username'];
+    // $password = md5($_POST['password']);
+
+    $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+
+    $raw_password = md5($_POST['password']);
+    $password = mysqli_real_escape_string($conn, $raw_password);
 
 
-
-<?php 
-    //Process the Value from Form and Save it in Database
-
-    //Check whether the submit button is clicked or not
-
-    if(isset($_POST['submit']))
-    {
-        // Button Clicked
-        //echo "Button Clicked";
-
-        //1. Get the Data from form
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
-        $password = md5($_POST['password']); //Password Encryption with MD5
-
-        //2. SQL Query to Save the data into database
-        $sql = "INSERT INTO tbl_user SET 
-            full_name='$full_name',
-            username='$username',
-            password='$password'
+    $sql = "INSERT INTO tbl_user SET 
+        full_name = '$fullname',
+        username = '$username',
+        password = '$password'
         ";
- 
-        //3. Executing Query and Saving Data into Datbase
-        $res = mysqli_query($conn, $sql) or die(mysqli_error());
+    $res = mysqli_query($conn, $sql);
 
-        //4. Check whether the (Query is Executed) data is inserted or not and display appropriate message
-        if($res==TRUE)
-        {
-            //Data Inserted
-            //echo "Data Inserted";
-            //Create a Session Variable to Display Message
-            $_SESSION['add'] = "<div class='success'>Registration Successfull.</div>";
-            //Redirect Page to Manage Admin
-            header("location:".SITEURL.'index.php');
-        }
-        else
-        {
-            //FAiled to Insert DAta
-            //echo "Faile to Insert Data";
-            //Create a Session Variable to Display Message
-            $_SESSION['add'] = "<div class='error'>Failed to Registration.</div>";
-            //Redirect Page to Add Admin
-            header("location:".SITEURL.'registration.php');
-        }
-
+    if($res==true)
+    {
+        $_SESSION['order'] = "<div class='success'>Registered Successfully.</div>";
+        header('location:'.SITEURL.'index.php');
     }
-    
+    else
+    {
+        $_SESSION['order'] = "<div class='error'>Failed to Register.</div>";
+        header('location:'.SITEURL.'registration.php');
+    }
+
+
+}
+
 ?>
-<?php include('partials-front/footer.php'); ?>

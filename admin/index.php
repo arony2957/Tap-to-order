@@ -81,10 +81,35 @@
 
                     ?>
 
-                    <h1>$<?php echo $total_revenue; ?></h1>
+                    <h1>$<?php echo (double) $total_revenue; ?></h1>
                     <br />
                     Revenue Generated
                 </div>
+
+                <div class="col-4 text-center">
+
+                    <?php
+                    //Creat SQL Query to Get Total Profit
+                    //Aggregate Function in SQL
+                    $sql4 = "SELECT SUM((o.qty * f.price)) AS totalPrice, SUM(o.qty * f.making_cost) as totalMakingCost  FROM tbl_order o JOIN tbl_food f ON o.food_id = f.id WHERE status='Delivered';";
+
+                    //Execute the Query
+                    $res4 = mysqli_query($conn, $sql4);
+
+                    //Get the VAlue
+                    $row4 = mysqli_fetch_assoc($res4);
+
+                    $profit = (double)$row4['totalPrice'] - (double)$row4['totalMakingCost'];
+                    //GEt the Total REvenue
+                    //$total_revenue = $row4['Total'];
+
+                    ?>
+
+                    <h1>$<?php echo $profit; ?></h1>
+                    <br />
+                    Total Profit
+                </div>
+
 
                 <div class="clearfix"></div>
 

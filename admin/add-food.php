@@ -40,6 +40,13 @@
                 </tr>
 
                 <tr>
+                    <td>Making Cost: </td>
+                    <td>
+                        <input type="number" name="making cost">
+                    </td>
+                </tr>
+
+                <tr>
                     <td>Select Image: </td>
                     <td>
                         <input type="file" name="image">
@@ -134,6 +141,7 @@
                 $title = $_POST['title'];
                 $description = $_POST['description'];
                 $price = $_POST['price'];
+                $making_cost = $_POST['making_cost'];
                 $category = $_POST['category'];
 
                 //Check whether radion button for featured and active are checked or not
@@ -212,6 +220,7 @@
                     title = '$title',
                     description = '$description',
                     price = $price,
+                    making_cost = $making_cost,
                     image_name = '$image_name',
                     category_id = $category,
                     featured = '$featured',

@@ -33,15 +33,30 @@
                     <li>
                         <a href="<?php echo SITEURL; ?>foods.php">Foods</a>
                     </li>
+                    <?php  if(!isset($_SESSION['front_user'])) //IF user session is not set
+                        {  ?>
                     <li>
                         <a href="<?php echo SITEURL; ?>login.php">log in</a>
                     </li>
                     <li>
                         <a href="<?php echo SITEURL; ?>registration.php">Registration</a>
                     </li>
+                    <?php } else {?>
+                        <li>
+                            <a href="<?php echo SITEURL; ?>logout.php">logout</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo SITEURL; ?>order_details.php">Order Details</a>
+                        </li>
+                    <?php }?>
+
+<!--                    <li>-->
+<!--                        <a href="--><?php //echo SITEURL; ?><!--payment.php">Payment</a>-->
+<!--                    </li>-->
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="<?php echo SITEURL; ?>contact.php">Contact</a>
                     </li>
+
                 </ul>
             </div>
 
